@@ -2,8 +2,29 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView, PasswordResetConfirmView
 from home.forms import RegistrationForm, LoginForm, UserPasswordResetForm, UserSetPasswordForm, UserPasswordChangeForm
 from django.contrib.auth import logout
-
 from django.contrib.auth.decorators import login_required
+
+# Add this new import
+from django.contrib.auth.decorators import user_passes_test
+
+# Add this new function at the top of the file
+def anonymous_required(function=None, redirect_url=None):
+    if not redirect_url:
+        redirect_url = 'pets:pet_list'
+    actual_decorator = user_passes_test(
+        lambda u: u.is_anonymous,
+        login_url=redirect_url
+    )
+    if function:
+        return actual_decorator(function)
+    return actual_decorator
+
+# Add this new view for the landing page
+@anonymous_required
+def landing_page(request):
+    return render(request, 'landing_page.html')
+
+# Existing views...
 
 # Dashboard
 def default(request):
@@ -12,6 +33,7 @@ def default(request):
     'segment': 'default'
   }
   return render(request, 'pages/dashboards/default.html', context)
+
 
 def automotive(request):
   context = {
@@ -395,7 +417,7 @@ def error_500(request, exception=None):
 
 def logout_view(request):
   logout(request)
-  return redirect('/accounts/login/basic-login/')
+  return redirect('/accounts/login/illustration-login/')
 
 
 
@@ -406,5 +428,6 @@ def i18n_view(request):
     'segment': 'i18n'
   }
   return render(request, 'pages/apps/i18n.html', context)
+
 
 

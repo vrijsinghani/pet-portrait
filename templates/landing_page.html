@@ -1,0 +1,72 @@
+{% extends "layouts/base-shadow.html" %}
+{% load static %}
+
+{% block title %} Pet Portrait AI - Transform Your Pet's Photos into Art {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <h1 class="display-4 fw-bold mb-4">Transform Your Pet's Photos into Stunning AI Art</h1>
+            <p class="lead mb-4">Upload a few snapshots and watch as our AI creates beautiful, unique portraits of your furry friend!</p>
+            <div class="mb-5">
+                <h5 class="fw-bold">🐾 Why Pet Portrait AI?</h5>
+                <ul class="list-unstyled">
+                    <li>✨ Create stunning, one-of-a-kind pet portraits</li>
+                    <li>🖼️ Choose from various artistic styles</li>
+                    <li>🚀 Fast and easy process - results in minutes</li>
+                    <li>💖 Perfect for gifts or personal keepsakes</li>
+                </ul>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{% url 'illustration_register' %}" class="btn btn-primary btn-lg px-4 me-md-2">Sign Up Now</a>
+                <a href="{% url 'illustration_login' %}" class="btn btn-outline-secondary btn-lg px-4">Sign In</a>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="position-relative">
+                <!-- Placeholder for main image -->
+                <img src="{% static 'assets/img/pet-portrait.png' %}" alt="AI-generated pet portrait" class="img-fluid rounded-3 shadow-lg">
+                <!-- Placeholders for sample portraits -->
+                <div style="position: absolute; top: 100%; left: 0; transform: translate(-50%, -50%); width: 120px; height: 120px; overflow: hidden; border-radius: 50%; box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);">
+                    <img src="{% static 'assets/img/sample-1.png' %}" alt="Sample portrait 1" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                
+                <div style="position: absolute; top: 0; left: 100%; transform: translate(-50%, -50%); width: 120px; height: 120px; overflow: hidden; border-radius: 50%; box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);">
+                    <img src="{% static 'assets/img/sample-2.png' %}" alt="Sample portrait 2" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                
+                <div style="position: absolute; top: 100%; left: 100%; transform: translate(-50%, -50%); width: 120px; height: 120px; overflow: hidden; border-radius: 50%; box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);">
+                    <img src="{% static 'assets/img/sample-3.png' %}" alt="Sample portrait 3" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 pt-5">
+        <div class="col-md-4">
+            <h3 class="fw-bold">1. Upload Photos</h3>
+            <p>Select a few favorite photos of your pet. The more angles and expressions, the better!</p>
+        </div>
+        <div class="col-md-4">
+            <h3 class="fw-bold">2. Choose Your Style</h3>
+            <p>Pick from various artistic styles, from classic portraits to modern pop art.</p>
+        </div>
+        <div class="col-md-4">
+            <h3 class="fw-bold">3. Receive Your Art</h3>
+            <p>Our AI works its magic, and you'll receive your unique pet portrait in minutes!</p>
+        </div>
+    </div>
+
+    <div class="text-center mt-5 pt-5">
+        <h2 class="fw-bold mb-4">Ready to Turn Your Pet into a Masterpiece?</h2>
+        <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg px-5">Get Started Now</a>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+    // Add any custom JavaScript for the landing page here
+</script>
+{% endblock javascripts %}

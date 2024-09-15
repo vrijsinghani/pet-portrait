@@ -42,7 +42,7 @@ INTERNAL_IPS = [
 ]
 
 # Add here your deployment HOSTS
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:5085', 'http://127.0.0.1:8000', 'http://127.0.0.1:5085', 'https://django-soft-dash-pro.onrender.com'] 
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:5100', 'http://127.0.0.1:5100', 'http://127.0.0.1:5100', 'https://django-soft-dash-pro.onrender.com', 'https://petportrait.rijsinghani.us', 'http://192.168.30.100:5100'] 
 
 
 # Application definition
@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'apps.tables',
     'apps.tasks',
     'apps.users',
+    'apps.pets',
 
     'allauth',
     'allauth.account',

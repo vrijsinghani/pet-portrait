@@ -60,7 +60,7 @@ urlpatterns = [
   # Authentication -> Register
   path('accounts/register/basic-register/', views.basic_register, name="basic_register"),
   path('accounts/register/cover-register/', views.cover_register, name="cover_register"),
-  path('accounts/register/illustration-register/', views.illustration_register, name="illustration_register"),
+  path('accounts/register/illustration-register/', views.illustration_register, name="illustration_register"), 
   # Authentication -> Login
   path('accounts/login/basic-login/', views.BasicLoginView.as_view(), name="basic_login"),
   path('accounts/login/cover-login/', views.CoverLoginView.as_view(), name="cover_login"),

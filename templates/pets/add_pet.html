@@ -1,0 +1,92 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add Pet {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Add New Pet</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <form method="post" enctype="multipart/form-data" class="p-3" id="addPetForm">
+                            {% csrf_token %}
+                            {{ pet_form.as_p }}
+                            <div id="imageInputs">
+                                <div class="mb-3">
+                                    {{ image_form.image.label_tag }}
+                                    {{ image_form.image }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ image_form.caption.label_tag }}
+                                    {{ image_form.caption }}
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary" id="addMoreImages">Add More Images</button>
+                            <button type="submit" class="btn btn-primary mt-3">Add Pet</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('addPetForm');
+        const imageInputs = document.getElementById('imageInputs');
+        const addMoreButton = document.getElementById('addMoreImages');
+
+        addMoreButton.addEventListener('click', function() {
+            const newImageInput = imageInputs.firstElementChild.cloneNode(true);
+            const newCaptionInput = imageInputs.lastElementChild.cloneNode(true);
+            
+            // Clear the values of the cloned inputs
+            newImageInput.querySelector('input').value = '';
+            newCaptionInput.querySelector('input').value = '';
+            
+            imageInputs.appendChild(newImageInput);
+            imageInputs.appendChild(newCaptionInput);
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            
+            // Rename image and caption inputs to arrays
+            const images = formData.getAll('image');
+            const captions = formData.getAll('caption');
+            formData.delete('image');
+            formData.delete('caption');
+            
+            images.forEach((image, index) => {
+                formData.append('image', image);
+                formData.append('caption', captions[index] || '');
+            });
+            
+            // Submit the form
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = "{% url 'pets:pet_list' %}";
+                } else {
+                    console.error('Form submission failed');
+                }
+            });
+        });
+    });
+</script>
+{% endblock javascripts %}

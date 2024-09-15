@@ -21,22 +21,26 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from home import views
 from django.views.static import serve
+from django.contrib.auth.decorators import login_required
+from django.views.generic import RedirectView
 
 handler404 = 'home.views.error_404'
 handler500 = 'home.views.error_500'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.landing_page, name='landing_page'),  # Landing page for unauthenticated users
     path('', include('home.urls')),
+    path('home/', login_required(RedirectView.as_view(pattern_name='pets:pet_list', permanent=False)), name='home'),  # Redirect authenticated users to pets app
+    path('pets/', include('apps.pets.urls')),  # Pets app URLs
     path("api/", include("apps.api.urls")),
     path('charts/', include('apps.charts.urls')),
     path('tasks/', include('apps.tasks.urls')),
     path("tables/", include("apps.tables.urls")),
-    path('', include('apps.file_manager.urls')),
+    path('file-manager/', include('apps.file_manager.urls')),
     path("users/", include("apps.users.urls")),
     path('i18n/', include('django.conf.urls.i18n')),
     path('accounts/', include('allauth.urls')),
-
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 

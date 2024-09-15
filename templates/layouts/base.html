@@ -24,18 +24,45 @@
   {% include 'includes/head.html' %}
   {% block extrahead %}{% endblock extrahead %}
   {% block extrastyle %}{% endblock extrastyle %}
+  <style>
+    .pet-portrait-header {
+      background-color: #ffffff;
+      margin-bottom: 1rem;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+    }
+    .pet-portrait-header h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #344767;
+      margin-bottom: 0.25rem;
+    }
+    .pet-portrait-header p {
+      font-size: 1rem;
+      color: #67748e;
+      margin-bottom: 0;
+    }
+    .main-content {
+      padding-top: 0.5rem;
+    }
+  </style>
 </head>
 
-<body class="g-sidenav-show bg-gray-100 {% block body %}{% endblock body %}">
+<body class="bg-gray-100 {% block body %}{% endblock body %}">
 
-  {% block sidebar %}
-    {% include 'includes/sidebar.html' %}
-  {% endblock sidebar %}
-
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    {% block header %}
-      {% include 'includes/navigation.html' %}
-    {% endblock header %}
+  <main class="main-content position-relative max-height-vh-100 h-100 w-100">
+    {% include 'includes/navigation.html' %}
+    <div class="container-fluid py-2">
+      <div class="row">
+        <div class="col-12">
+          <div class="pet-portrait-header">
+            <h1>Pet Portrait</h1>
+            <p>Capture and cherish memories of your beloved pets</p>
+          </div>
+        </div>
+      </div>
+    </div>
     {% block content %}{% endblock content %}
   </main>
 
@@ -55,6 +82,7 @@
     }
   </script>
   
+  {% block javascripts %}{% endblock javascripts %}
 
 </body>
 </html>

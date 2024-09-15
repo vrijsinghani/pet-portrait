@@ -29,6 +29,7 @@
       <div class="col-12">
         {% block header %}
 
+        {% include 'includes/navigation--shadow.html' %} 
 
         {% endblock header %}
       </div>
@@ -38,11 +39,11 @@
   {% block content %}{% endblock content %}
 
   {% block footer %}
-    {% include 'includes/footer.html' %}
+    {% include 'includes/footer-fullscreen.html' %}
   {% endblock footer %}
 
   {% block fixed_plugin %} 
-    {% comment %} {% include 'includes/fixed-plugin.html' %} {% endcomment %}
+    {% include 'includes/fixed-plugin.html' %}
   {% endblock fixed_plugin %}
 
   {% include 'includes/scripts.html' %}
